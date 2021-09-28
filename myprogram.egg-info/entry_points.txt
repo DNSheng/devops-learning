@@ -1,3 +1,0 @@
-[console_scripts]
-myprogram = myprogram.__main__:main
-
