@@ -1,6 +1,17 @@
 name: Curl
 
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "The environment to run the saucelabs tests on"
+        required: true
+        type: choice
+        options:
+          - dev
+          - dev2
+          - qa1
+          - qa2
 
 jobs:
   build:
@@ -11,6 +22,9 @@ jobs:
     - name: Hello
       run: |
         echo "Hello world"
+    - name: Env select
+      run: |
+        echo "Running on env: ${{ github.event.inputs.environment }}"
     - name: Sauce Connect Proxy Action
       uses: saucelabs/sauce-connect-action@v2.1.1
       with:
