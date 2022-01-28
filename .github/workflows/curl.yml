@@ -11,3 +11,11 @@ jobs:
     - name: Hello
       run: |
         echo "Hello world"
+    - name: Sauce Connect Proxy Action
+      uses: saucelabs/sauce-connect-action@v2.1.1
+      with:
+        username: ${{ secrets.SAUCE_USERNAME }}
+        accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
+        tunnelIdentifier: "Askuity_Saucelabs_tunnel_name"
+        region: "us-west"
+
