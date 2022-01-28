@@ -1,0 +1,13 @@
+name: Curl
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+    - name: Hello
+      run: |
+        echo "Hello world"
