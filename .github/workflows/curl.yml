@@ -32,4 +32,7 @@ jobs:
         accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
         tunnelIdentifier: "Askuity_Saucelabs_tunnel_name"
         region: "us-west"
+    - name: Sleep
+      run: |
+        sleep 180
 
