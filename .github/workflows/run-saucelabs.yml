@@ -1,4 +1,4 @@
-name: Curl
+name: Run Saucelabs tests
 
 on:
   workflow_dispatch:
@@ -19,12 +19,10 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - name: Hello
-      run: |
-        echo "Hello world"
     - name: Env select
       run: |
         echo "Running on env: ${{ github.event.inputs.environment }}"
+
     - name: Sauce Connect Proxy Action
       uses: saucelabs/sauce-connect-action@v2.1.1
       with:
@@ -32,7 +30,20 @@ jobs:
         accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
         tunnelIdentifier: "Askuity_Saucelabs_tunnel_name"
         region: "us-west"
-    - name: Sleep
-      run: |
-        sleep 180
 
+    - name: Setup npm 14.x
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - run: npm install
+    - run: npm test
+
+    - name: Checkout test suite & run test
+      uses: actions/checkout@v2
+
+    - run: ls
+    - run: node app.js
+
+    - run: curl http://localhost:3000
+
+    - run: sleep 180
