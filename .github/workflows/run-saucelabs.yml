@@ -16,27 +16,17 @@ on:
 jobs:
   build:
 
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
     - name: Env select
       run: |
         echo "Running on env: ${{ github.event.inputs.environment }}"
 
-    - name: Sauce Connect Proxy Action
-      uses: saucelabs/sauce-connect-action@v2.1.1
-      with:
-        username: ${{ secrets.SAUCE_USERNAME }}
-        accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
-        tunnelIdentifier: "Askuity_Saucelabs_tunnel_name"
-        region: "us-west"
-
     - name: Setup npm 14.x
       uses: actions/setup-node@v2
       with:
         node-version: '14'
-    #- run: npm install
-    #- run: npm test
 
     - name: Checkout test suite & run test
       uses: actions/checkout@v2
@@ -46,5 +36,9 @@ jobs:
     - run: node app.js &
 
     - run: curl http://localhost:3000
+
+    - name: Copy secret to file
+      run: |
+        cat ${{ secrets.CREDENTIALS }} > credentials.yaml
 
     - run: sleep 180
