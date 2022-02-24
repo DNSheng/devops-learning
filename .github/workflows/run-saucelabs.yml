@@ -39,6 +39,6 @@ jobs:
 
     - name: Copy secret to file
       run: |
-        cat ${{ secrets.CREDENTIALS }} > credentials.yaml
+        echo ${{ secrets.CREDENTIALS }} > credentials.yaml
 
     - run: sleep 180
