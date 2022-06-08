@@ -12,6 +12,7 @@ def main():
     print("Hello. The program has started to run.")
     print(f"The circumference of a circle of r=3 is {circumference(3)}")
     print(f"The pandas version installed is: {pandas.__version__}")
+    print("test stuff")
 
 
 def circumference(radius):
